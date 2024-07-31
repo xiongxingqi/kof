@@ -22,6 +22,10 @@ export class Player extends GameObject {
         this.seepdy = 1000;//垂直速度
 
         this.ctx = this.root.gameMap.ctx;
+
+        this.pressed_key = this.root.gameMap.controller.pressed_key;
+
+        this.status = 3 //0: idle 1:向前 2: 向后  3: 跳跃 4: 攻击  5: 被打 6: 死亡 
     }
     start() {
 

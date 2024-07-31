@@ -1,5 +1,5 @@
 import { GameObject } from "../game_object/base.js";
-
+import { Controller } from "../controller/base.js";
 export class GameMap extends GameObject {
     constructor(root) {
         super();
@@ -8,6 +8,8 @@ export class GameMap extends GameObject {
         this.ctx = this.$canvas[0].getContext("2d");//获取canvas2d上下文供画图使用
         this.root.$kof.append(this.$canvas);//将canvas加入根元素
         this.$canvas.focus();//默认聚焦
+
+        this.controller = new Controller(this.$canvas);
     }
     start() {
 
