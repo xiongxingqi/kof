@@ -1,12 +1,12 @@
 import { GameMap } from "./game_map/base.js";
-import { Player } from "./player/player.js";
+import { Kyo } from "./player/kyo.js";
 class KOF {
     constructor(id) {
         this.$kof = $('#' + id);
         // console.log(this.$kof);
         this.gameMap = new GameMap(this);
         this.players = [
-            new Player(this, {
+            new Kyo(this, {
                 id: 0,
                 x: 200,
                 y: 0,
@@ -14,7 +14,7 @@ class KOF {
                 height: 200,
                 color: "red"
             }),
-            new Player(this, {
+            new Kyo(this, {
                 id: 1,
                 x: 1000,
                 y: 0,
