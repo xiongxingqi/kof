@@ -51,8 +51,9 @@ export class Player extends GameObject {
         if (this.status === 6) return;
         this.status = 5;
         this.frame_current_cnt = 0;
-
-        this.hp = Math.max(0, this.hp - 50);
+        this.vx = 0;
+        this.vy = 0;
+        this.hp = Math.max(0, this.hp - 10);
 
         if (this.hp === 0) {
             this.status = 6;
@@ -171,9 +172,8 @@ export class Player extends GameObject {
     }
 
     update_move() {
-        if (this.status === 3) {
-            this.vy += this.gravity;
-        }
+
+        this.vy += this.gravity;
 
         this.x += this.vx * this.timedeldt / 1000;
         this.y += this.vy * this.timedeldt / 1000;
@@ -182,7 +182,9 @@ export class Player extends GameObject {
         if (this.y > 450) {
             this.y = 450;
             this.vy = 0;
-            this.status = 0;
+            if (this.status === 3) {
+                this.status = 0;
+            }
         }
 
         if (this.x < 0) {
@@ -236,6 +238,7 @@ export class Player extends GameObject {
                     this.frame_current_cnt--;
                 } else {
                     this.status = 0;
+
                 }
 
             }
