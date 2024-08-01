@@ -12,7 +12,7 @@ class KOF {
                 y: 0,
                 width: 120,
                 height: 200,
-                color: "red"
+                color: "blue"
             }),
             new Kyo(this, {
                 id: 1,

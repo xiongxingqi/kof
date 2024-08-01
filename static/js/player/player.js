@@ -127,10 +127,18 @@ export class Player extends GameObject {
     }
     update_render() {
 
-        // this.ctx.fillStyle = this.color;渲染玩家模型
+        this.ctx.fillStyle = this.color; //渲染玩家模型
+        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        console.log(this.color);
 
-        // this.ctx.fillRect(this.x, this.y, this.width, this.height);
-        // console.log(this.color);
+        this.ctx.fillStyle = "red";
+        if (this.difrection > 0) {
+            this.ctx.fillRect(this.x + 120, this.y + 35, 110, 30);
+        } else {
+            this.ctx.fillRect(this.x - 110, this.y + 35, 110, 30);
+        }
+
+        // this.ctx.fillRect(this.x + 120, this.y + 35, 60, 30);
 
         let status = this.status;
         if (status === 1 && this.vx * this.difrection < 0) {
