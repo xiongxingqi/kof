@@ -37,6 +37,7 @@ export class Player extends GameObject {
 
     update() {
         this.update_controller();
+        this.update_difrection()
         this.update_move();
         this.update_render();
     }
@@ -89,6 +90,18 @@ export class Player extends GameObject {
 
     }
 
+    update_difrection() {
+        let players = this.root.players;
+        if (players[0] && players[1]) {
+            let me = this, you = players[1 - this.id];
+            if (me.x > you.x) {
+                this.difrection = -1;
+            } else {
+                this.difrection = 1;
+            }
+        }
+    }
+
     update_move() {
         if (this.status === 3) {
             this.vy += this.gravity;
@@ -126,8 +139,19 @@ export class Player extends GameObject {
 
         let animation = this.animations.get(status);
         if (animation && animation.is_loaded) {
-            let current = parseInt(this.frame_current_cnt / animation.frame_rate) % animation.frame_cnt;;
-            this.ctx.drawImage(animation.gif.frames[current].image, this.x, this.y + animation.offset_y, animation.gif.width * animation.scale, animation.gif.height * animation.scale);
+
+            let current = parseInt(this.frame_current_cnt / animation.frame_rate) % animation.frame_cnt;
+            if (this.difrection > 0) {
+                this.ctx.drawImage(animation.gif.frames[current].image, this.x, this.y + animation.offset_y, animation.gif.width * animation.scale, animation.gif.height * animation.scale);
+            } else {
+                this.ctx.save();
+                this.ctx.scale(-1, 1);
+                this.ctx.translate(-this.root.gameMap.$canvas.width(), 0);
+                this.ctx.drawImage(animation.gif.frames[current].image, this.root.gameMap.$canvas.width() - this.x - this.width, this.y + animation.offset_y, animation.gif.width * animation.scale, animation.gif.height * animation.scale);
+                this.ctx.restore();
+            }
+
+            // this.ctx.drawImage(animation.gif.frames[current].image, this.x, this.y + animation.offset_y, animation.gif.width * animation.scale, animation.gif.height * animation.scale);
         }
 
         if (this.status === 4) {
