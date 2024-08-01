@@ -32,6 +32,7 @@ export class Player extends GameObject {
         this.frame_current_cnt = 0;
 
         this.hp = 100;
+        this.$hp = this.root.$kof.find(`.kof-hp-${this.id}-div`);
     }
     start() {
 
@@ -54,6 +55,12 @@ export class Player extends GameObject {
         this.vx = 0;
         this.vy = 0;
         this.hp = Math.max(0, this.hp - 10);
+
+        // this.$hp.width(this.$hp.parent().width() * this.hp / 100);
+
+        this.$hp.animate({
+            width: this.$hp.parent().width() * this.hp / 100
+        }, 1000);
 
         if (this.hp === 0) {
             this.status = 6;
@@ -109,6 +116,12 @@ export class Player extends GameObject {
     }
 
     update_controller() {
+        if (this.root.gameMap.game_status === 7) {
+            this.status = 0;
+            this.vx = 0;
+            // this.vy = 0;
+            return;
+        }
         let w, d, a, space;
         // console.log(this.pressed_keys);
         if (this.id === 0) {
@@ -172,8 +185,10 @@ export class Player extends GameObject {
     }
 
     update_move() {
-
+        // if (this.root.gameMap.game_status === 7) return;
         this.vy += this.gravity;
+
+        console.log(this.vy)
 
         this.x += this.vx * this.timedeldt / 1000;
         this.y += this.vy * this.timedeldt / 1000;
