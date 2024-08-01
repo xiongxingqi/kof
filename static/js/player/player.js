@@ -18,7 +18,7 @@ export class Player extends GameObject {
 
         this.gravity = 50;
 
-        this.seepdx = 600;//水平速度
+        this.seepdx = 500;//水平速度
         this.seepdy = 2000;//垂直速度
 
         this.ctx = this.root.gameMap.ctx;
@@ -28,6 +28,8 @@ export class Player extends GameObject {
         this.status = 3 //0: idle 1:向前 2: 向后  3: 跳跃 4: 攻击  5: 被打 6: 死亡 
 
         this.animations = new Map();
+
+        this.frame_current_cnt = 0;
     }
     start() {
 
@@ -67,6 +69,7 @@ export class Player extends GameObject {
                 }
                 this.vy = -this.seepdy;
                 this.status = 3;
+                this.frame_current_cnt = 0;
             } else if (d) {
                 this.vx = this.seepdx;
                 this.status = 1;
@@ -83,7 +86,9 @@ export class Player extends GameObject {
     }
 
     update_move() {
-        this.vy += this.gravity;
+        if (this.status === 3) {
+            this.vy += this.gravity;
+        }
 
         this.x += this.vx * this.timedeldt / 1000;
         this.y += this.vy * this.timedeldt / 1000;
@@ -92,9 +97,7 @@ export class Player extends GameObject {
         if (this.y > 450) {
             this.y = 450;
             this.vy = 0;
-            if (this.status === 3) {
-                this.status = 0;
-            }
+            this.status = 0;
         }
 
         if (this.x < 0) {
@@ -107,9 +110,22 @@ export class Player extends GameObject {
     }
     update_render() {
 
-        this.ctx.fillStyle = this.color;//渲染玩家模型
+        // this.ctx.fillStyle = this.color;渲染玩家模型
 
-        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        // this.ctx.fillRect(this.x, this.y, this.width, this.height);
         // console.log(this.color);
+
+        let status = this.status;
+        if (status === 1 && this.vx * this.difrection < 0) {
+            status = 2;
+        }
+
+        let animation = this.animations.get(status);
+        if (animation && animation.is_loaded) {
+            let current = parseInt(this.frame_current_cnt / animation.frame_rate) % animation.frame_cnt;;
+            this.ctx.drawImage(animation.gif.frames[current].image, this.x, this.y + animation.offset_y, animation.gif.width * animation.scale, animation.gif.height * animation.scale);
+        }
+
+        this.frame_current_cnt++;
     }
 }

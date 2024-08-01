@@ -20,9 +20,9 @@ export class GameMap extends GameObject {
     }
 
     render() {
-        // this.ctx.clearRect(0,0,this.ctx.width(),this.ctx.height());//清空画布内容
-        this.ctx.fillStyle = "black"//test 矩形填充颜色
-        this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);//绘制矩形
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);//清空画布内容
+        // this.ctx.fillStyle = "black"//test 矩形填充颜色
+        // this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);//绘制矩形
         // console.log(this.$canvas.width());
         // console.log();
     }
