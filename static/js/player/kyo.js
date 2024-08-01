@@ -12,7 +12,7 @@ export class Kyo extends Player {
 
         let outer = this;
         let offsets = [0, -22, -22, -135, 0, 0, 0]
-        let frame_rates = [12, 12, 12, 6, 8, 8, 8]
+        let frame_rates = [12, 12, 12, 6, 11, 8, 8]
         for (let i = 0; i < 7; i++) {
             let gif = GIF();
 

@@ -59,7 +59,11 @@ export class Player extends GameObject {
 
 
         if (this.status === 1 || this.status === 0) {
-            if (w) {
+            if (space) {
+                this.status = 4;
+                this.vx = 0;
+                this.frame_current_cnt = 0;
+            } else if (w) {
                 if (d) {
                     this.vx = this.seepdx;
                 } else if (a) {
@@ -124,6 +128,12 @@ export class Player extends GameObject {
         if (animation && animation.is_loaded) {
             let current = parseInt(this.frame_current_cnt / animation.frame_rate) % animation.frame_cnt;;
             this.ctx.drawImage(animation.gif.frames[current].image, this.x, this.y + animation.offset_y, animation.gif.width * animation.scale, animation.gif.height * animation.scale);
+        }
+
+        if (this.status === 4) {
+            if (this.frame_current_cnt === animation.frame_rate * animation.frame_cnt - 1) {
+                this.status = 0;
+            }
         }
 
         this.frame_current_cnt++;
