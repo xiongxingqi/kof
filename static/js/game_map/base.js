@@ -11,12 +11,12 @@ export class GameMap extends GameObject {
 
         this.controller = new Controller(this.$canvas);
         this.root.$kof.append($(`<div class="kof-head">
-        <div class="kof-hp-0"><div class="kof-hp-0-div"></div></div>
+        <div class="kof-hp-0"><div class="kof-hp-0-div"><div></div></div></div>
         <div class="kof-timer">60</div>
-        <div class="kof-hp-1"><div class="kof-hp-1-div"></div></div>
+        <div class="kof-hp-1"><div class="kof-hp-1-div"><div></div></div></div>
         </div>`));
         this.$timer = this.root.$kof.find(".kof-timer");
-        this.last_time = 10000;
+        this.last_time = 60000;
         this.game_status = 0;
 
     }

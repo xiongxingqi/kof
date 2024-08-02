@@ -48,13 +48,13 @@
 #kof > .kof-head > .kof-hp-1 > .kof-hp-1-div{
     width: 100%;
     height: 100%;
-    background: lightgreen;
+    background: red;
 }
 
 #kof > .kof-head > .kof-hp-0 > .kof-hp-0-div{
     width: 100%;
     height: 100%;
-    background: lightgreen;
+    background: red;
     float: right;
 }
 #kof > .kof-head > .kof-timer{
@@ -63,5 +63,17 @@
     color: white;
     font-weight: 400;
     line-height: 50px;
+}
+
+#kof > .kof-head > .kof-hp-0 > .kof-hp-0-div > div{
+    width: 100%;
+    height: 100%;
+    background-color: lightgreen;
+    float: right;
+}
+#kof > .kof-head > .kof-hp-1 > .kof-hp-1-div > div{
+    width: 100%;
+    height: 100%;
+    background-color: lightgreen;
 }
 
